@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.devtides.androidcoroutinesretrofit.R
 import com.devtides.androidcoroutinesretrofit.model.Country
+import com.devtides.androidcoroutinesretrofit.view.loadImage
 import kotlinx.android.synthetic.main.item_country.view.*
 
-class CountryListAdapter(var countries: ArrayList<Country>): RecyclerView.Adapter<CountryListAdapter.CountryViewHolder>() {
+class CountryListAdapter(var countries: ArrayList<Country>) :
+    RecyclerView.Adapter<CountryListAdapter.CountryViewHolder>() {
 
     fun updateCountries(newCountries: List<Country>) {
         countries.clear()
@@ -26,7 +28,7 @@ class CountryListAdapter(var countries: ArrayList<Country>): RecyclerView.Adapte
         holder.bind(countries[position])
     }
 
-    class CountryViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class CountryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val imageView = view.imageView
         private val countryName = view.name
