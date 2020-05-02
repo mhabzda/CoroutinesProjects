@@ -4,7 +4,7 @@ object LoginState {
     var isLoggedIn = false
     var user: User? = null
 
-    fun loggedOut() {
+    fun logout() {
         isLoggedIn = false
         user = null
     }
