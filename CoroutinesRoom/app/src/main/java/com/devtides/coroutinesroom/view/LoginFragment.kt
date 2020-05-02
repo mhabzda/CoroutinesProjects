@@ -1,6 +1,5 @@
 package com.devtides.coroutinesroom.view
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +27,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loginBtn.setOnClickListener { onLogin(it) }
+        loginBtn.setOnClickListener { onLogin() }
         gotoSignupBtn.setOnClickListener { onGotoSignup(it) }
 
         viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
@@ -37,21 +36,28 @@ class LoginFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.loginComplete.observe(this, Observer { isComplete ->
-
+            Toast.makeText(activity, "Logged in", Toast.LENGTH_SHORT).show()
+            val action = LoginFragmentDirections.actionGoToMain()
+            Navigation.findNavController(loginBtn).navigate(action)
         })
 
         viewModel.error.observe(this, Observer { error ->
-
-
+            Toast.makeText(activity, error, Toast.LENGTH_SHORT).show()
         })
     }
 
-    private fun onLogin(v: View) {
-        val action = LoginFragmentDirections.actionGoToMain()
-        Navigation.findNavController(v).navigate(action)
+    private fun onLogin() {
+        val userName: String? = loginUsername.text.toString()
+        val password: String? = loginPassword.text.toString()
+
+        if (userName.isNullOrEmpty() || password.isNullOrEmpty()) {
+            Toast.makeText(activity, "All fields have to be provided!", Toast.LENGTH_SHORT).show()
+        } else {
+            viewModel.login(userName, password)
+        }
     }
 
-    private fun onGotoSignup(v: View){
+    private fun onGotoSignup(v: View) {
         val action = LoginFragmentDirections.actionGoToSignup()
         Navigation.findNavController(v).navigate(action)
     }
