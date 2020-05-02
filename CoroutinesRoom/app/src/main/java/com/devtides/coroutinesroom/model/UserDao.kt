@@ -1,15 +1,18 @@
 package com.devtides.coroutinesroom.model
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 
 @Dao
 interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(user: User): Long
+    suspend fun insert(user: User): Long
 
     @Query("SELECT * FROM user WHERE user_name = :userName")
-    fun getUser(userName: String): User
+    suspend fun getUser(userName: String): User?
 
     @Query("DELETE FROM user WHERE id = :userId")
-    fun deleteUser(userId: Long)
+    suspend fun deleteUser(userId: Long)
 }
