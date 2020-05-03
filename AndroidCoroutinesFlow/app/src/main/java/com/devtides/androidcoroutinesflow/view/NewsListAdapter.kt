@@ -5,7 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.devtides.androidcoroutinesflow.R
-import com.devtides.androidcoroutinesretrofit.model.NewsArticle
+import com.devtides.androidcoroutinesflow.view.loadImage
+import com.devtides.androidcoroutinesflow.model.NewsArticle
 import kotlinx.android.synthetic.main.item_news_article.view.*
 
 class NewsListAdapter: RecyclerView.Adapter<NewsListAdapter.NewsItemViewHolder>() {
